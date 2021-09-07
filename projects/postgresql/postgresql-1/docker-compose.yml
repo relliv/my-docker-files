@@ -13,10 +13,6 @@ services:
       POSTGRES_USER: ${POSTGRES_USER}
       POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
       # - POSTGRES_PASSWORD_FILE: ./data/postgres/secrets/pg_password_file <-- alternative for POSTGRES_PASSWORD (to use with docker secrets)
-    logging:
-      driver: "json-file"
-      options:
-        max-size: "10m"
 
   # pdAdmin
   postgresql_1_pgadmin:
@@ -27,18 +23,12 @@ services:
     environment:
       PGADMIN_DEFAULT_EMAIL: ${PGADMIN_EMAIL}
       PGADMIN_DEFAULT_PASSWORD: ${PGADMIN_PASSWORD}
-    logging:
-      driver: "json-file"
-      options:
-        max-size: "10m"
 
   # postgres-backup-local
   postgresql_1_pgbackups:
     image: prodrigestivill/postgres-backup-local
     container_name: postgresql_1_pgbackups
     restart: on-failure
-    healthcheck:
-      disable: true
     user: postgres:postgres
     volumes:
       - ./data/pgbackups/backups:/backups
