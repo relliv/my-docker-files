@@ -2,8 +2,6 @@
 
 This project basic PostgreSQL based example presentation. 
 
-Allocated ports: 54321, 54322, 54323.
-
 ## Using
 
 - **[PostgreSQL](https://www.postgresql.org/)**: the world's most advanced open source relational database.
