@@ -1,0 +1,25 @@
+version: "3.8"
+
+services:
+  # NodeJS App
+  nginx_1_api:
+    build: ./api
+    container_name: nginx_1_api
+    restart: unless-stopped
+    ports:
+      - ${API_PORT}:3000
+    volumes:
+      - ./api:/usr/src/app/
+      - /usr/app/node_modules
+      
+  # NGINX
+  nginx_1_nginx:
+    image: nginx:latest
+    container_name: nginx_1_nginx
+    restart: unless-stopped
+    depends_on:
+      - nginx_1_api
+    ports:
+      - ${NGINX_PORT}:80
+    volumes:
+      - ./nginx/conf/:/etc/nginx/conf.d/
