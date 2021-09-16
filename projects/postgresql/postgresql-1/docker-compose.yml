@@ -3,7 +3,7 @@ version: "3.4"
 services:
   # PostgreSQL
   postgresql_1_postgres:
-    image: postgres:12
+    image: postgres:latest
     container_name: postgresql_1_postgres
     restart: unless-stopped
     ports:
@@ -16,7 +16,7 @@ services:
 
   # pdAdmin
   postgresql_1_pgadmin:
-    image: dpage/pgadmin4
+    image: dpage/pgadmin4:latest
     container_name: postgresql_1_pgadmin
     ports:
       - ${PGADMIN_PORT}:80
@@ -26,7 +26,7 @@ services:
 
   # postgres-backup-local
   postgresql_1_pgbackups:
-    image: prodrigestivill/postgres-backup-local
+    image: prodrigestivill/postgres-backup-local:latest
     container_name: postgresql_1_pgbackups
     restart: on-failure
     user: postgres:postgres
