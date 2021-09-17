@@ -1,0 +1,12 @@
+# https://prometheus.io/docs/prometheus/latest/configuration/configuration/
+
+global:
+  scrape_interval: 10s
+  scrape_timeout: 10s
+
+scrape_configs:
+  - job_name: 'nginx-status-job'
+    metrics_path: '/metrics'
+    follow_redirects: false
+    static_configs:
+      - targets: ['prometheus_1_nginx_exporter:9113']
