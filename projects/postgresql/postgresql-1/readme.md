@@ -5,7 +5,7 @@ This project basic PostgreSQL based example presentation.
 ## Using
 
 - **[PostgreSQL](https://www.postgresql.org/)**: the world's most advanced open source relational database.
-- **[pgAdmin](https://www.pgadmin.org/)**: the most popular and feature rich open source administration and development platform. Also pgAdmin using React and websocket
+- **[pgAdmin](https://www.pgadmin.org/)**: the most popular and feature rich open source administration and development platform.
 - **[postgres-backup-local](https://github.com/prodrigestivill/docker-postgres-backup-local)**: Backup PostgresSQL to local filesystem with periodic backups and rotate backups.
 
 ## Configuration
