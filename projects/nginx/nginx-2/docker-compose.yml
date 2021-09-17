@@ -1,0 +1,12 @@
+version: "3.8"
+
+services:
+  # NGINX
+  nginx_2_nginx:
+    build: ./nginx/
+    container_name: nginx_2_nginx
+    restart: unless-stopped
+    ports:
+      - ${NGINX_PORT}:80
+    volumes:
+      - ./nginx/conf/:/etc/nginx/conf.d/
