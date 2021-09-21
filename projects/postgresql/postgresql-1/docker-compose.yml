@@ -23,6 +23,10 @@ services:
     environment:
       PGADMIN_DEFAULT_EMAIL: ${PGADMIN_EMAIL}
       PGADMIN_DEFAULT_PASSWORD: ${PGADMIN_PASSWORD}
+    depends_on:
+      - postgresql_1_postgres
+    networks:
+      - postgres
 
   # pgweb
   postgresql_1_pgweb:
@@ -37,6 +41,8 @@ services:
       DATABASE_URL: postgres://${POSTGRES_USER}:${POSTGRES_PASSWORD}@postgresql_1_postgres:5432/${POSTGRES_DB}?sslmode=disable
     depends_on:
       - postgresql_1_postgres
+    networks:
+      - postgres
 
   # postgres-backup-local
   postgresql_1_pgbackups:
@@ -62,3 +68,11 @@ services:
       BACKUP_KEEP_WEEKS: 4
       BACKUP_KEEP_MONTHS: 6
       HEALTHCHECK_PORT: ${PGBACKUPS_PORT}
+    depends_on:
+      - postgresql_1_postgres
+    networks:
+      - postgres
+      
+networks:
+  postgres:
+    driver: bridge
