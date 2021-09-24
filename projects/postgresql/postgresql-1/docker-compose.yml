@@ -1,4 +1,4 @@
-version: "3.4"
+version: "3.8"
 
 services:
   # PostgreSQL
@@ -37,8 +37,6 @@ services:
     restart: unless-stopped
     ports: 
       - ${PGWEB_PORT}:8081
-    # links: 
-    #   - postgresql_1_postgres:postgres
     environment:
       DATABASE_URL: postgres://${POSTGRES_USER}:${POSTGRES_PASSWORD}@postgresql_1_postgres:5432/${POSTGRES_DB}?sslmode=disable
     depends_on:
