@@ -1,0 +1,53 @@
+version: "3.8"
+
+services:
+  # App with PHP 8.1
+  app_php_8_1:
+    build:
+      context: ./app-php-8-1
+    container_name: app_php_8_1
+    restart: unless-stopped
+    ports:
+      - ${APP_PHP_8_1_PORT}:80
+    volumes:
+      - ./app-php-8-1:/var/www/html
+    command: php -S app_php_8_1:80 -t ./
+
+  # App with PHP 7.4
+  app_php_7_4:
+    build:
+      context: ./app-php-7-4
+    container_name: app_php_7_4
+    restart: unless-stopped
+    ports:
+      - ${APP_PHP_7_4_PORT}:80
+    volumes:
+      - ./app-php-7-4:/var/www/html
+    command: php -S app_php_7_4:80 -t ./
+
+  # App with PHP 7.0
+  app_php_7_0:
+    build:
+      context: ./app-php-7-0
+    container_name: app_php_7_0
+    restart: unless-stopped
+    ports:
+      - ${APP_PHP_7_0_PORT}:80
+    volumes:
+      - ./app-php-7-0:/var/www/html
+    command: php -S app_php_7_0:80 -t ./
+
+  # App with PHP 5.6
+  app_php_5.6:
+    build:
+      context: ./app-php-5-6
+    container_name: app_php_5_6
+    restart: unless-stopped
+    ports:
+      - ${APP_PHP_5_6_PORT}:80
+    volumes:
+      - ./app-php-5-6:/var/www/html
+    command: php -S app_php_5_6:80 -t ./
+# networks:
+#   postgres:
+#     driver: bridge
