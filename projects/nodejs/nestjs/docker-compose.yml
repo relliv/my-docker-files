@@ -1,0 +1,25 @@
+version: "3.8"
+
+services:
+  # Node App 1
+  nestjs_app_1:
+    image: node:lts-alpine
+    container_name: nestjs_app_1
+    restart: unless-stopped
+    ports:
+      - ${NEST_APP_1_PORT}:3000
+    volumes:
+      - ./app:/home/node/app
+    command: npm run start:dev --prefix /home/node/app
+
+  # # Node App 2
+  # node_app_2:
+  #   build:
+  #     context: ./app-prod
+  #   container_name: node_app_2
+  #   restart: unless-stopped
+  #   ports:
+  #     - ${NODE_APP_2_PORT}:3000
+  #   # volumes:
+  #   #   - ./app:/var/www/html
+  #   # command: node ./server.js
