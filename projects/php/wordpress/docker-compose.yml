@@ -1,0 +1,39 @@
+version: "3.8"
+
+services:
+  # Wordpress 1
+  wordpress_app_1:
+    image: wordpress:php8.1-apache
+    container_name: wordpress_app_1
+    restart: unless-stopped
+    ports:
+      - ${WORDPRESS_APP_1_PORT}:80
+    volumes:
+      - ./wp-app-1:/var/www/html
+    environment:
+      WORDPRESS_DB_HOST: "mysql_1_db"
+      WORDPRESS_DB_USER: ${MYSQL_USER}
+      WORDPRESS_DB_NAME: ${MYSQL_DB}
+      WORDPRESS_TABLE_PREFIX: "wp_"
+      WORDPRESS_DB_PASSWORD: ${MYSQL_PASSWORD}
+    networks:
+      - mysql_net
+
+  # MySQL
+  mysql_1_db:
+    image: mysql:latest
+    container_name: mysql_1_db
+    restart: unless-stopped
+    ports:
+      - ${MYSQL_PORT}:3306
+    environment:
+      MYSQL_DATABASE: ${MYSQL_DB}
+      MYSQL_USER: ${MYSQL_USER}
+      MYSQL_PASSWORD: ${MYSQL_PASSWORD}
+      MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD}
+    networks:
+      - mysql_net
+
+networks:
+  mysql_net:
+    driver: bridge
