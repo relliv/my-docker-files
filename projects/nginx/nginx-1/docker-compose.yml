@@ -11,7 +11,7 @@ services:
     volumes:
       - ./api:/usr/src/app/
       - /usr/app/node_modules
-      
+
   # NGINX
   nginx_1_nginx:
     image: nginx:latest

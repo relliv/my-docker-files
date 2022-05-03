@@ -15,7 +15,7 @@ services:
       MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD}
     networks:
       - mysql
-      
+
   # phpMyAdmin
   mysql_1_phpmyadmin:
     image: phpmyadmin:latest
@@ -37,7 +37,7 @@ services:
     image: adminer:latest
     container_name: mysql_1_adminer
     restart: unless-stopped
-    ports: 
+    ports:
       - ${ADMINER_PORT}:8080
     depends_on:
       - mysql_1_db
@@ -49,7 +49,7 @@ services:
     image: linuxserver/mysql-workbench:latest
     container_name: mysql_1_mysql_workbench
     restart: unless-stopped
-    ports: 
+    ports:
       - ${MYSQL_WORKBENCH_PORT}:3000
     environment:
       PUID: 1000

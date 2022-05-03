@@ -11,7 +11,7 @@ services:
     volumes:
       - ./prometheus/conf/:/etc/prometheus/
     networks:
-     - prometheus
+      - prometheus
 
   # Grafana
   prometheus_1_grafana:
@@ -20,11 +20,11 @@ services:
     restart: unless-stopped
     ports:
       - ${GRAFANA_PORT}:3000
-    user: '472'
+    user: "472"
     volumes:
       - ./prometheus/conf:/etc/prometheus/
     networks:
-     - prometheus
+      - prometheus
 
   # NGINX
   prometheus_1_nginx:
@@ -36,7 +36,7 @@ services:
     volumes:
       - ./nginx/conf/:/etc/nginx/conf.d/
     networks:
-     - prometheus
+      - prometheus
 
   # nginx-prometheus-exporter
   prometheus_1_nginx_exporter:
@@ -51,10 +51,10 @@ services:
       TIMEOUT: ${NGINX_PROM_EXPORTER_INTERVAL}
       NGINX_RETRIES: ${NGINX_PROM_EXPORTER_RETRY}
       NGINX_RETRY_INTERVAL: ${NGINX_PROM_EXPORTER_INTERVAL}
-      SCRAPE_URI: 'http://prometheus_1_nginx:80/status'
-      TELEMETRY_PATH: '/metrics'
+      SCRAPE_URI: "http://prometheus_1_nginx:80/status"
+      TELEMETRY_PATH: "/metrics"
     networks:
-     - prometheus
+      - prometheus
 
 networks:
   prometheus:
