@@ -1,0 +1,25 @@
+version: "3.8"
+
+services:
+  # Node App 1
+  node_app_1:
+    image: node:lts-alpine
+    container_name: node_app_1
+    restart: unless-stopped
+    ports:
+      - ${NODE_APP_1_PORT}:3000
+    volumes:
+      - ./app-dev:/home/node/app
+    command: node /home/node/app/server.js
+
+  # Node App 2
+  node_app_2:
+    build:
+      context: ./app-prod
+    container_name: node_app_2
+    restart: unless-stopped
+    ports:
+      - ${NODE_APP_2_PORT}:3000
+    # volumes:
+    #   - ./app:/var/www/html
+    # command: node ./server.js
