@@ -1,0 +1,41 @@
+version: "3.8"
+
+services:
+  # Node App 1
+  ip2location_mysql_1:
+    image: ip2location/mysql:latest
+    container_name: ip2location_mysql_1
+    restart: unless-stopped
+    ports:
+      - ${IP2LOCATION_1_PORT}:3306
+    environment:
+      TOKEN: ${IP2LOCATION_TOKEN}
+      CODE: ${IP2LOCATION_CODE}
+      IP_TYPE: ${IP2LOCATION_IP_TYPE}
+      MYSQL_PASSWORD: ${IP2LOCATION_MYSQL_PASSWORD}
+    networks:
+      - mysql_net
+    command: graphjin serve
+
+  graphjin_api:
+    image: dosco/graphjin:latest
+    container_name: graphjin_api
+    # restart: unless-stopped
+    ports:
+      - ${GRAPHJIN_API_PORT}:8080
+    volumes:
+      - ./config:/config
+    environment:
+      GO_ENV: ${GRAPHJIN_API_GO_ENV}
+      GJ_DATABASE_HOST: ${GRAPHJIN_API_DATABASE_HOST}
+      GJ_DATABASE_USER: ${GRAPHJIN_API_DATABASE_USER}
+      GJ_DATABASE_PASSWORD: ${IP2LOCATION_MYSQL_PASSWORD}
+      CGO_ENABLED: 0
+      # PORT: 8080
+    # command: wtc
+    networks:
+      - mysql_net
+
+networks:
+  mysql_net:
+    driver: bridge
