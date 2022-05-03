@@ -1,0 +1,35 @@
+version: "3.8"
+
+services:
+  # Laravel App 1
+  laravel_app_1:
+    build:
+      context: ./project
+    container_name: laravel_app_1
+    restart: unless-stopped
+    ports:
+      - ${LARAVEL_APP_1_PORT}:80
+    volumes:
+      - ./project:/var/www/html
+    command: php -S laravel_app_1:80 -t ./public
+    networks:
+      - mysql_net
+
+  # MySQL
+  mysql_1_db:
+    image: mysql:latest
+    container_name: mysql_1_db
+    restart: unless-stopped
+    ports:
+      - ${MYSQL_PORT}:3306
+    environment:
+      MYSQL_DATABASE: ${MYSQL_DB}
+      MYSQL_USER: ${MYSQL_USER}
+      MYSQL_PASSWORD: ${MYSQL_PASSWORD}
+      MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD}
+    networks:
+      - mysql_net
+
+networks:
+  mysql_net:
+    driver: bridge
