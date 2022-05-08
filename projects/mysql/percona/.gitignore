@@ -1,0 +1,5 @@
+.env
+*.sql
+*.sql.gz
+data/mysql-backup/backups/*
+data/mysql-workbench/config/*

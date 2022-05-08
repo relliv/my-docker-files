@@ -1,0 +1,22 @@
+version: "3.8"
+
+services:
+  # Percona for MySQL
+  percona_1_db:
+    image: percona:latest
+    container_name: percona_1_db
+    restart: unless-stopped
+    ports:
+      - ${MYSQL_PORT}:3306
+    environment:
+      MYSQL_DATABASE: ${MYSQL_DB}
+      MYSQL_USER: ${MYSQL_USER}
+      MYSQL_PASSWORD: ${MYSQL_PASSWORD}
+      MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD}
+      MYSQL_ALLOW_EMPTY_PASSWORD: ${MYSQL_ALLOW_EMPTY_PASSWORD}
+    networks:
+      - percona_net
+
+networks:
+  percona_net:
+    driver: bridge
