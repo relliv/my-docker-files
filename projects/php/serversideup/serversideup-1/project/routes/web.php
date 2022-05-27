@@ -21,3 +21,7 @@ Route::get('/', function () {
 Route::get('/users', function () {
     return User::all();
 });
+
+Route::get('/phpinfo', function () {
+    return phpinfo();
+});
