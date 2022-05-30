@@ -1,5 +1,7 @@
 # my-docker-files
 
+<img src="https://preview.dragon-code.pro/EgoistDeveloper/my-docker-files.svg?brand=docker" alt="EgoistDeveloper my-docker-files"/>
+
 My custom docker configurations for various examples projects. Example projects are added to focused subject folder.
 
 ## Notes
