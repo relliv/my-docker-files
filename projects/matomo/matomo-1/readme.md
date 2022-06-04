@@ -2,7 +2,7 @@
 
 ![Screenshot 1](./screenshots/screenshot-1.png)
 
-This project is demonstrating how to use the matomo-php to track visits and conversions. This app is formerly known as the **piwik** and is a free open source google analytics alternative project.
+This project is demonstrating how to use the **[matomo](https://matomo.org/)** to track visits and conversions. This app is formerly known as the **[piwik](https://piwik.pro/)** and is a free open source google analytics alternative project.
 
 ## Installation
 
@@ -28,3 +28,9 @@ Then you can login with your admin credentials at `http://localhost:{MATOMO_PORT
 - Take script code and add it to `laravel-app/resources/views/head.blade.php` and navigate to `http://localhost:{LARAVEL_APP_PORT}`.
 - Matomo will track your visits and conversions automatically.
 - You must be **disable adblocker** to see tracking code.
+
+## Sources
+
+- [docker hub page](https://hub.docker.com/_/matomo)
+- [github repo](https://github.com/matomo-org/matomo)
+- [official examples](https://github.com/matomo-org/docker/tree/master/.examples)
