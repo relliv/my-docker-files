@@ -1,0 +1,77 @@
+version: "3.8"
+
+services:
+  # Matomo App
+  matomo_app_1:
+    build:
+      context: ./matomo-app
+      dockerfile: ./Dockerfile
+    container_name: matomo_app_1
+    restart: unless-stopped
+    volumes:
+      - ./matomo-app:/var/www/html
+      # - ./matomo-app/config:/var/www/html/config:rw
+      # - ./matomo-app/logs:/var/www/html/logs
+    ports:
+      - ${MATOMO_PORT}:80
+    environment:
+      MATOMO_DATABASE_HOST: mysql_1_db
+      MATOMO_DATABASE_ADAPTER: ${MATOMO_DATABASE_ADAPTER}
+      MATOMO_DATABASE_TABLES_PREFIX: ${MATOMO_DATABASE_TABLES_PREFIX}
+      MATOMO_DATABASE_USERNAME: ${MYSQL_USER}
+      MATOMO_DATABASE_PASSWORD: ${MYSQL_PASSWORD}
+      MATOMO_DATABASE_DBNAME: ${MYSQL_DB}
+      PHP_MEMORY_LIMIT: ${MATOMO_PHP_MEMORY_LIMIT}
+    networks:
+      - mysql_net
+      - matomo_net
+
+  # Laravel App
+  laravel_app_1:
+    image: serversideup/php:8.1-fpm-nginx
+    container_name: laravel_app_1
+    restart: unless-stopped
+    ports:
+      - ${LARAVEL_APP_PORT}:9999
+    volumes:
+      - ./laravel-app:/var/www/html
+    environment:
+      RUN_LARAVEL_AUTOMATIONS: "true"
+    command: php -S laravel_app_1:9999 -t ./public
+    networks:
+      - mysql_net
+
+  # MySQL
+  mysql_1_db:
+    image: mysql:latest
+    container_name: mysql_1_db
+    restart: unless-stopped
+    ports:
+      - ${MYSQL_PORT}:3306
+    environment:
+      MYSQL_DATABASE: ${MYSQL_DB}
+      MYSQL_USER: ${MYSQL_USER}
+      MYSQL_PASSWORD: ${MYSQL_PASSWORD}
+      MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD}
+    networks:
+      - mysql_net
+    command: --max-allowed-packet=64MB
+
+  web_nginx:
+    image: nginx:latest
+    restart: always
+    container_name: web_nginx
+    volumes:
+      # - ./matomo-app:/var/www/html:ro
+      # see https://github.com/matomo-org/matomo-nginx
+      - ./nginx/matomo.conf:/etc/nginx/conf.d/default.conf:ro
+    ports:
+      - ${NGINX_PORT}:80
+    networks:
+      - matomo_net
+
+networks:
+  mysql_net:
+    driver: bridge
+  matomo_net:
+    driver: bridge
