@@ -1,4 +1,4 @@
-# mailhog server
+# MailHog Server
 
 [MailHog](https://github.com/mailhog/MailHog) is Web and API based SMTP testing server.
 
