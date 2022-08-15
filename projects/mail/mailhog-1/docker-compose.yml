@@ -1,0 +1,11 @@
+version: "3.8"
+
+services:
+  # MailHog Server
+  mail_hog_1:
+    image: mailhog/mailhog:latest
+    container_name: mail_hog_1
+    restart: unless-stopped
+    ports:
+      - 10001:1025
+      - 10002:8025
