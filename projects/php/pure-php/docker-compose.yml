@@ -1,6 +1,18 @@
 version: "3.8"
 
 services:
+  # App with PHP 8.2
+  app_php_8_2:
+    build:
+      context: ./app-php-8-2
+    container_name: app_php_8_2
+    restart: unless-stopped
+    ports:
+      - ${APP_PHP_8_2_PORT}:80
+    volumes:
+      - ./app-php-8-2:/var/www/html
+    command: php -S app_php_8_2:80 -t ./
+
   # App with PHP 8.1
   app_php_8_1:
     build:

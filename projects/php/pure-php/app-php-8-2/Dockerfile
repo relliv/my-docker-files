@@ -1,4 +1,4 @@
-FROM php:8.1-apache
+FROM php:8.2-apache
 
 # mysql driver does not come with php
 # so we add it from the official repository
