@@ -1,0 +1,16 @@
+version: "3.8"
+
+services:
+  # Gitlab
+  gitlab_1:
+    image: gitlab/gitlab-ee:latest
+    container_name: gitlab_1
+    restart: unless-stopped
+    ports:
+      - "8088:80"
+      - "4433:443"
+      - "2222:22"
+    volumes:
+      - ./data:/var/opt/gitlab
+      - ./logs:/var/log/gitlab
+      - ./config:/etc/gitlab
